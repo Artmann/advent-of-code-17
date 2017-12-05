@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+
+# A new system policy has been put in place that requires all accounts to use a passphrase
+# instead of simply a password. A passphrase consists of a series of
+# words (lowercase letters) separated by spaces. To ensure
+# security, a valid passphrase must contain no duplicate
+# words. The system's full passphrase list is
+# available as your puzzle input. How many
+# passphrases are valid?
+
+require_relative '../lib/day4'
+
+path = File.join(File.dirname(__FILE__), '../inputs/day4.txt')
+input = File.read(path)
+  .split(/\n/)
+
+day4 = Day4.new
+
+puts "Output 1:"
+puts input.select { |passphrase| day4.is_valid_passphrase? passphrase }.size
+
+puts "Output 2:"
+puts input.select { |passphrase| day4.is_valid_super_secure_passphrase? passphrase }.size
