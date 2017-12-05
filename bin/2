@@ -1,0 +1,27 @@
+#!/usr/bin/env ruby
+
+# The spreadsheet consists of rows of apparently-random numbers. To make sure the recovery process is on
+# the right track, they need you to calculate the spreadsheet's checksum. For each row, determine
+# the difference between the largest value and the smallest value; the checksum is the sum
+# of all of these differences.
+
+# It sounds like the goal is to find the only two numbers in each row where one evenly divides the
+# other - that is, where the result of the division operation is a whole number.
+# They would like you to find those numbers on each line, divide them, and
+# add up each line's result.
+
+require_relative '../lib/day2'
+
+path = File.join(File.dirname(__FILE__), '../inputs/day2.txt')
+input =  File.read(path)
+  .split(/\n/)
+  .map { |r| r.split(/\t/).map { |v| v.to_i } }
+
+puts "Output 1:"
+puts Day2.new.checksum(input) { |row| row.max - row.min }
+
+puts "Output 2:"
+puts Day2.new.checksum(input) { |row|
+  tuple = row.combination(2).select { |t| t.max % t.min == 0 }.first
+  tuple.max / tuple.min
+}
