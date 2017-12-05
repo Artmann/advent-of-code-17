@@ -1,0 +1,29 @@
+#!/usr/bin/env ruby
+
+# You come across an experimental new kind of memory stored on an infinite two-dimensional grid. Each square on
+# the grid is allocated in a spiral pattern starting at a location marked 1 and then counting up while
+# spiraling outward. While this is very space-efficient (no squares are skipped), requested data
+# must be carried back to square 1 (the location of the only access port for this
+# memory system) by programs that can only move up, down, left, or right.
+# They always take the shortest path: the Manhattan Distance between
+# the location of the data and square 1. How many steps are
+# required to carry the data from the square identified in
+# your puzzle input all the way to the access port?
+
+# As a stress test on the system, the programs here clear the grid and then store the value 1 in square 1. Then,
+# in the same allocation order as shown above, they store the sum of the values in all adjacent squares,
+# including diagonals. Once a square is written, its value does not change.
+# What is the first value written that is larger than your puzzle input?
+
+require_relative '../lib/day3'
+
+input = 265149
+
+day3 = Day3.new
+distance = day3.distance([0, 0], day3.get_position(input))
+
+puts "Output 1:"
+puts distance
+
+puts "Output 2:"
+puts day3.stress_test(input)
