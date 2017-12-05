@@ -1,0 +1,40 @@
+#!/usr/bin/env ruby
+
+#An urgent interrupt arrives from the CPU: it's trapped in a maze of jump instructions, and it would like assistance
+# from any programs with spare cycles to help find the exit. The message includes a list of the offsets for each
+# jump. Jumps are relative: -1 moves to the previous instruction, and 2 skips the next one. Start at the first
+# instruction in the list. The goal is to follow the jumps until one leads outside the list. In addition,
+# these instructions are a little strange; after each jump, the offset of that instruction increases by
+# 1. So, if you come across an offset of 3, you would move three instructions forward, but change it
+# to a 4 for the next time it is encountered.
+
+require_relative '../lib/day5'
+
+path = File.join(File.dirname(__FILE__), '../inputs/day5.txt')
+input = File.read(path)
+  .split(/\n/)
+  .map { |j| j.to_i}
+
+day5 = Day5.new
+
+maze = input.clone
+index = 0
+counter = 0
+while (index >= 0 and index < maze.size) do
+  index, maze = day5.strange_jump(index, maze)
+  counter += 1
+end
+
+puts "Output 1:"
+puts counter
+
+maze = input.clone
+index = 0
+counter = 0
+while (index >= 0 and index < maze.size) do
+  index, maze = day5.stranger_jump(index, maze)
+  counter += 1
+end
+
+puts "Output 2:"
+puts counter
