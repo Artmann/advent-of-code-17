@@ -21,10 +21,10 @@ RSpec.describe Day6 do
   end
 
   describe "#recycle_memory_until_duplicate_state_is_found" do
-      it "returns the number of cycles and the first duplicate state" do
-        cycles, state = Day6.new.recycle_memory_until_duplicate_state_is_found([0, 2, 7, 0])
-        expect(cycles).to eq(5)
-        expect(state).to eq([2, 4, 1, 2])
-      end
+    it "returns the number of cycles and the first duplicate state" do
+      cycles, state = Day6.new.recycle_memory_until_duplicate_state_is_found([0, 2, 7, 0])
+      expect(cycles).to eq(5)
+      expect(state).to eq([2, 4, 1, 2])
+    end
   end
 end
