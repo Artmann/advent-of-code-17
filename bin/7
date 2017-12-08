@@ -1,0 +1,39 @@
+#!/usr/bin/env ruby
+
+require_relative '../lib/day7'
+
+path = File.join(File.dirname(__FILE__), '../inputs/day7.txt')
+input = File.read(path)
+  .split(/\n/)
+  .map { |r|
+    parts = r.split(/\s/)
+    [parts[0], parts[1].to_i, parts[2..-1]]
+  }
+
+
+tree = Tree.new
+
+input.each do |row|
+  parent = Node.new row[0], row[1]
+  tree.add parent
+  row[2].each do |child|
+    tree.add(Node.new child, nil, parent.name)
+  end
+end
+
+puts "Output 1:"
+puts tree.root_node
+
+puts "Output 2:"
+tree.find_unbalances_nodes.each do |name|
+  puts name
+  puts "######"
+  tree.children(name).each do |c|
+    puts "#{c.name} - #{tree.weight(c.name)}"
+  end
+  puts "######"
+end
+
+puts tree.find("xvlxy").weight
+puts tree.find("quempkz").weight
+puts tree.find("tulwp").weight
